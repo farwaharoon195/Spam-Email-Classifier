@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Spam Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📧 AI Spam Detection System</h1>
+    <p class="subtitle">Machine Learning Powered Email Classifier</p>
+
+    <form action="/predict" method="post">
+        <textarea name="message" placeholder="Paste your email or message here..." required></textarea>
+        <br/>
+        <button type="submit">Analyze Message</button>
+    </form>
+
+    {% if prediction_text %}
+
+    <div class="result-box">
+        <h2>{{ prediction_text }}</h2>
+
+        <div class="bar">
+            <div class="fill" style="width: {{ confidence }}%"></div>
+        </div>
+
+        <p><b>Confidence:</b> {{ confidence }}%</p>
+        <p><b>Original Message:</b> {{ original }}</p>
+
+        <div class="explain">
+            <h3>🧠 Why this result?</h3>
+            <p>{{ explanation }}</p>
+        </div>
+    </div>
+
+    {% endif %}
+
+    <div class="footer">
+        <p>Built using Python • Scikit-learn • Flask</p>
+    </div>
+
+</div>
+
+</body>
+</html>
